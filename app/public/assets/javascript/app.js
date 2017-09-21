@@ -42,6 +42,10 @@ $("#subAns").on("click", function(event) {
   }
 
   var comp = false;
+  if ((results.name === "") || (results.photo === "")) {
+    $("#matchName").text("Please add you name and photo.");
+    return
+  }
   for (var i = 0; i < results.scores.length; i++) {
     if (results.scores[i] < 1) {
       comp = false;
@@ -50,7 +54,6 @@ $("#subAns").on("click", function(event) {
     } else {
       comp = true;
     }
-    console.log(comp);
   }
 
   if (comp) {
@@ -65,7 +68,6 @@ $("#subAns").on("click", function(event) {
           math.push(Math.abs(friendPoints - userPoints));
         }
         diff.push(math.reduce(getSum));
-        console.log(diff);
       }
 
       Array.min = function(array) {
@@ -74,8 +76,6 @@ $("#subAns").on("click", function(event) {
       var minDiff = Array.min(diff);
       var minArr = getArr(diff, minDiff);
 
-      console.log(minDiff);
-      console.log(minArr);
       showFriend(data, minArr);
       post(results);
     });
